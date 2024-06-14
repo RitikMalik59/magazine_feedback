@@ -8,8 +8,8 @@ if (isset($_POST['feedback_submit'])) {
     $company = $_POST['company'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $answer_1 = implode(', ', $_POST['answer_1']);
-    $answer_2 = implode(', ', $_POST['answer_2']);
+    $answer_1 = implode('; ', $_POST['answer_1']);
+    $answer_2 = implode('; ', $_POST['answer_2']);
     $answer_3 = ($_POST['answer_3'] == 'no') ? 'No' : 'Yes : ' . $_POST['answer_3'];
     $answer_4 = $_POST['answer_4'];
     $answer_5 = $_POST['answer_5'];

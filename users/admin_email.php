@@ -49,17 +49,19 @@
 
         .container {
             margin: 0 auto !important;
-            max-width: 600px;
+            max-width: 700px;
             padding: 0;
-            padding-top: 24px;
-            width: 600px;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            width: 700px;
         }
 
         .content {
             box-sizing: border-box;
             display: block;
             margin: 0 auto;
-            max-width: 600px;
+            max-width: 700px;
             padding: 0;
         }
 
@@ -214,6 +216,26 @@
             margin-bottom: 0;
         }
 
+        .text-center {
+            text-align: center !important;
+        }
+
+        .pt-1 {
+            padding-top: 0.25rem !important;
+        }
+
+        .pb-1 {
+            padding-bottom: 0.25rem !important;
+        }
+
+        .bg-secondary-subtle {
+            background-color: #e2e3e5 !important;
+        }
+
+        .mt-5 {
+            margin-top: 3rem !important;
+        }
+
         .preheader {
             color: transparent;
             display: none;
@@ -328,18 +350,30 @@
                         <!-- START MAIN CONTENT AREA -->
                         <tr>
                             <td class="wrapper">
-                                <!-- <p>Hi there</p> -->
-                                <!-- <h2>Hello , </h2> -->
+                                <h1>Ritik , just submitted a feedback </h1>
 
-                                <h1>Thanks for your feedback </h1>
-                                <p>Thank you for taking the time to provide us with your valuable feedback. We appreciate your input and are grateful for your honesty and openness.</p>
-                                <p>Your feedback helps us to improve our products and services, and to better understand the needs and preferences of our customers. We take all feedback seriously and use it as a tool to constantly improve and enhance the quality of our offerings.</p>
-                                <p>Thank you again for your feedback, and please do not hesitate to reach out to us if you have any further questions or concerns.</p>
-                                <p>Best regards,</p>
-                                <p>Vis Group</p>
+                                <H3 class="text-center  bg-secondary-subtle pb-1 pt-1">Personal Information</H3>
 
-                                <!-- <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p> -->
+                                <p><b>Name : </b> Ritik</p>
+                                <p><b>Designation : </b></p>
+                                <p><b>Company </b>: Ritik</p>
+                                <p><b>Phone : </b>Ritik</p>
+                                <p><b>Email : </b>Ritik</p>
 
+                                <H3 class="text-center  bg-secondary-subtle pb-1 pt-1">Feedback Questions</H3>
+
+                                <p><b>Q1. Which Topic did you find most interesting to read from May issue ? *</b></p>
+                                <p><b>Ans :</b> Cover story - Gated Communities Rising High with Smart Solutions; Magazine Feedback; Driving the Eco-Friendly Evolution</p>
+                                <p><b>Q2. Which section in the magazine, is the most interesting read for you ?*</b></p>
+                                <p><b>Ans :</b> Products & Systems ; Industry Talks</p>
+                                <p><b>Q3. Have you Purchased / Plan to Purchase any products listed in the magazine ? *</b></p>
+                                <p><b>Ans :</b> </p>
+                                <p><b>Q4. Which Company Ads did you find interesting ? *</b></p>
+                                <p><b>Ans :</b> Yes </p>
+                                <p><b>Q5. Any additional suggestions / feedback regarding the overall content ? *</b></p>
+                                <p><b>Ans :</b> </p>
+                                <p><b>Q6. Do mention the topics you would like to read in future issues ? *</b></p>
+                                <p><b>Ans :</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat suscipit hic numquam, itaque illo quibusdam, repellendus ullam aperiam dolores sed mollitia! Quia, ut incidunt consequuntur accusamus cumque minus numquam ratione. </p>
 
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                     <tbody>
@@ -356,8 +390,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- <p>This is a really simple email template. It's sole purpose is to get the recipient to click the button with no distractions.</p>
-                                <p>Good luck! Hope it works.</p> -->
                             </td>
                         </tr>
 
@@ -381,21 +413,6 @@
                             </tr>
                         </table>
                     </div>
-                    <!-- <div class="footer">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="content-block">
-                                    <span class="apple-link">Company Inc, 7-11 Commercial Ct, Belfast BT1 2NB</span>
-                                    <br> Don't like these emails? <a href="http://htmlemail.io/blog">Unsubscribe</a>.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="content-block powered-by">
-                                    Powered by <a href="http://htmlemail.io">HTMLemail.io</a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div> -->
 
                     <!-- END FOOTER -->
 
