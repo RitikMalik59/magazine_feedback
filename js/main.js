@@ -11,4 +11,6 @@ $( document ).ready(function() {
             $('#share_details').html('');
         }
     });
+
+    
 });

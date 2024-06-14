@@ -12,7 +12,7 @@
                     <!-- <h5>Feedback</h5> -->
                     <!-- <p>Please fill this form to register with us</p> -->
                     <p class="fs-6 fw-medium">Thanks for being a part of Clean India Journal - The Voice of the Indian Cleaning Industry. Being a responsible magazine, we are on the journey of constant improvement. Kindly share your valuable feedback to help us serve the cleaning & hygiene professionals better and A Clean India at large.</p>
-                    <form class="row g-3" action="./users/submit_feedback.php" method="post">
+                    <form class="row g-3" id="feedback_form" action="./users/submit_feedback.php" method="post">
                         <div class=" bg-secondary-subtle mt-5">
                             <h5 class="text-center pt-1">Personal Information </h5>
                         </div>
@@ -89,6 +89,7 @@
 
                         <div class="col-md-12">
                             <label class="form-label fw-bold">Which Topic did you find most interesting to read from May issue ? <sup class="text-danger">*</sup></label>
+                            <div id="errorToShow"></div>
                             <?php
                             $options_for_answer_1 = [
                                 'Cover story - Gated Communities Rising High with Smart Solutions',
@@ -149,7 +150,7 @@
                                 </div>
 
                             <?php endforeach; ?>
-
+                            <span id="errorToShow"></span>
                             <span class="invalid-feedback"><br /></span>
                         </div>
                         <div class="col-md-12">
@@ -230,5 +231,80 @@
             </table>
         </div> -->
     </div>
+
+    <script>
+        $(document).ready(function() {
+            // console.log('validator');
+            // just for the demos, avoids form submit
+            // jQuery.validator.setDefaults({
+            //     debug: true,
+            //     success: "valid"
+            // });
+            $("#feedback_form").validate({
+                // Specify validation rules
+                rules: {
+                    // The key name on the left side is the name attribute
+                    // of an input field. Validation rules are defined
+                    // on the right side
+                    name: "required",
+                    designation: "required",
+                    company: "required",
+                    phone: {
+                        required: true,
+                        maxlength: 12,
+                        minlength: 10,
+                        digits: true
+                    },
+                    email: {
+                        required: true,
+                        // Specify that email should be validated
+                        // by the built-in "email" rule
+                        email: true
+                    },
+                    "answer_1[]": {
+                        required: true,
+                        minlength: 1
+                    },
+                    "answer_2[]": {
+                        required: true,
+                        minlength: 1
+                    }
+
+                },
+                // Specify validation error messages
+                messages: {
+                    name: "Please enter your Name",
+                    designation: "Please enter your Designation",
+                    company: {
+                        required: "Please provide a company name",
+                        // minlength: "Your password must be at least 5 characters long"
+                    },
+                    phone: {
+                        required: "Please enter your valid phone number",
+                        minlength: "Your phone number must be at least 10 characters long",
+                        maxlength: "Your phone number must not be more than 12 characters long"
+                    },
+                    email: "Please enter a valid email address"
+                },
+                "answer_1[]": "Please select at least one checkbox.",
+                "answer_2[]": "Please select at least one checkbox.",
+                errorPlacement: function(label, element) {
+                    if (element.attr("name") === "answer_1[]" || element.attr("name") === "answer_2[]" || element.attr("name") === "answer_3") {
+                        // error.appendTo("#errorToShow");
+                        element.parent().parent().append(label); // this would append the label after all your checkboxes/labels (so the error-label will be the last element in <div class="controls"> )
+                        // element.append('#errorToShow'); // this would append the label after all your checkboxes/labels (so the error-label will be the last element in <div class="controls"> )
+                    } else {
+                        label.insertAfter(element); // standard behaviour
+                    }
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function(form) {
+                    form.submit();
+                }
+
+            });
+        });
+    </script>
 
     <?php include "includes/footer.php"; ?>

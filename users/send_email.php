@@ -57,8 +57,8 @@ if (isset($_REQUEST['id'])) {
         $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('from@example.com', 'Mailer');         // Set sender of the mail
-        $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
+        $mail->setFrom('fromAdmin@example.com', 'Mailer');         // Set sender of the mail
+        $mail->addAddress($email, $name);     //Add a recipient
         // $mail->addAddress('ellen@example.com');               //Name is optional
         // $mail->addReplyTo('info@example.com', 'Information');
         // $mail->addCC('cc@example.com');
@@ -70,11 +70,11 @@ if (isset($_REQUEST['id'])) {
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Here is the subject';
+        $mail->Subject = 'Magazine feedback was submittesd successfully';
         $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-        $mail->send();
+        // $mail->send();
         echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
