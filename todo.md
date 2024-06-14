@@ -6,8 +6,8 @@ This is a file with a top-level heading.
 - [X] if clicked Yes radio open text input else no
 - [X] reqiured validation not working
 - [X] email body for user and admin
-- [ ] add email setting in config file
-- [ ] check for error and fix it
-- [ ]
+- [] add email setting in config file
+- [] check for error and fix it
+- [X] update is_email_sent to 1 if email is sent in db
 - [ ]
 - [ ]

@@ -46,7 +46,8 @@ if (isset($_REQUEST['id'])) {
         // $body = include "./test.php";
         $user_email_body = file_get_contents('user_email.php');
         $user_email = $email;
-        $admin_email = 'admin@gmail.com';
+        $admin_name = 'Admin';
+        $admin_email = 'fromAdmin@example.com';
         // $admin_email_body = file_get_contents('admin_email.php');
         $admin_email_body =
         '<!doctype html>
@@ -414,7 +415,7 @@ if (isset($_REQUEST['id'])) {
                                         <H3 class="text-center  bg-secondary-subtle pb-1 pt-1">Feedback Questions</H3>
         
                                         <p><b>Q1. Which Topic did you find most interesting to read from May issue ? *</b></p>
-                                        <p><b>Ans :</b> ' . $answer_1 . '/p>
+                                        <p><b>Ans :</b> ' . $answer_1 . '</p>
                                         <p><b>Q2. Which section in the magazine, is the most interesting read for you ?*</b></p>
                                         <p><b>Ans :</b> ' . $answer_2 . '</p>
                                         <p><b>Q3. Have you Purchased / Plan to Purchase any products listed in the magazine ? *</b></p>
@@ -477,13 +478,12 @@ if (isset($_REQUEST['id'])) {
         
         </html>';
 
-        var_dump($data);
-        echo '<br>';
+        // var_dump($data);
+        // echo '<br>';
 
 
 
         if ($is_email_sent === 0) {
-            echo 'send email';
 
             //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
@@ -492,17 +492,17 @@ if (isset($_REQUEST['id'])) {
                 //Server settings
                 // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'sandbox.smtp.mailtrap.io';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'e2fecd3ce9e387';                     //SMTP username
-                $mail->Password   = '33b49ee5f22ede';                               //SMTP password
+                $mail->Host       = SMTP_HOST;                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = SMTP_AUTH;                                   //Enable SMTP authentication
+                $mail->Username   = SMTP_USERNAME;                     //SMTP username
+                $mail->Password   = SMTP_PASSWORD;                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-                $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                $mail->Port       = SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
                 // clear addresses
                 $mail->clearAddresses();
-                $mail->setFrom('fromAdmin@example.com', 'Mailer');         // Set sender of the mail
+                $mail->setFrom($admin_email, $admin_name);         // Set sender of the mail
                 $mail->addAddress($user_email, $name);     //Add a recipient
                 // $mail->addAddress('ellen@example.com');               //Name is optional
                 // $mail->addReplyTo('info@example.com', 'Information');
@@ -521,7 +521,7 @@ if (isset($_REQUEST['id'])) {
                 // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
-                echo 'Message has been sent';
+                echo 'User Email has been sent <br>';
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
@@ -531,11 +531,11 @@ if (isset($_REQUEST['id'])) {
                 //Recipients
                 // clear addresses
                 $mail->clearAddresses();
-                $mail->setFrom('fromAdmin@example.com', 'Mailer');         // Set sender of the mail
-                $mail->addAddress($admin_email, $name);     //Add a recipient
+                $mail->setFrom($admin_email, $admin_name);         // Set sender of the mail
+                $mail->addAddress($admin_email, $admin_name);     //Add a recipient
                 // $mail->addAddress('ellen@example.com');               //Name is optional
                 // $mail->addReplyTo('info@example.com', 'Information');
-                $mail->addCC('cc2@example.com');
+                // $mail->addCC('cc2@example.com');
                 // $mail->addBCC('bcc@example.com');
 
                 //Attachments
@@ -550,16 +550,25 @@ if (isset($_REQUEST['id'])) {
                 // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
-                echo 'Message has been sent';
+                echo 'Admin Email has been sent <br>';
+                $is_email_sent = 1;
+
+                // set is_email_sent in database to 1 when email sent successfully
+                // so that email is sent only once
+                if ($is_email_sent) {
+                    $query = "UPDATE feedback SET is_email_sent=? WHERE id=?";
+                    $stmt = $connection->prepare($query);
+                    $stmt->execute([$is_email_sent, $id]);
+                    $row_count = $stmt->rowCount();
+                }
+
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-            // die();
         } else {
-            echo 'exit code';
+            echo '<h1>Email sent already !</h1>';
+            // echo 'exit code';
         }
     }
-    // echo $name . '<br>';
-
 
 }

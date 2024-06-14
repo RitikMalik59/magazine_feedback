@@ -8,6 +8,14 @@ define('DB_PASSWORD', '');
 define('DB_NAME', 'magazine');
 define('DB_PREFIX', 'ma_');
 
+// Email Credentials
+
+define('SMTP_HOST', 'sandbox.smtp.mailtrap.io');
+define('SMTP_AUTH', true);
+define('SMTP_USERNAME', 'e2fecd3ce9e387');
+define('SMTP_PASSWORD', '33b49ee5f22ede');
+define('SMTP_PORT', 587);
+
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
