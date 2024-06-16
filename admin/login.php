@@ -1,5 +1,5 @@
 <?php include "../config/db_connect.php"; ?>
-<?php include APPROOT . "/admin/includes/admin_header.php"; ?>
+<?php include "./includes/admin_header.php"; ?>
 
 <?php
 

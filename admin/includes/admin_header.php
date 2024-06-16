@@ -1,7 +1,3 @@
-<?php
-is_loggedIn();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +15,12 @@ is_loggedIn();
     <!-- bootstrap icon  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <style>
+        /* #importFrm form {
+            border: 2px dashed #007bff;
+            padding: 15px;
+        } */
+    </style>
 </head>
 
 <body>

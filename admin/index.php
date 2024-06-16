@@ -1,12 +1,15 @@
 <?php include "../config/db_connect.php"; ?>
 <?php include APPROOT . "/admin/includes/admin_header.php"; ?>
+<?php
+is_loggedIn();
+?>
 
 <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
 
 <div class="table-responsive mt-2" id="feedbackTable">
-    <table class="table table-hover table-striped caption-top">
+    <table class="table table-hover table-striped table-bordered caption-top">
         <caption class="text-center fw-bold">List of Feedback of Users</caption>
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th class="text-center" scope="col">ID</th>
                 <th class="text-center" scope="col">Name</th>
@@ -55,8 +58,8 @@
                 <?php endforeach; ?>
 
             <?php else : echo ' <tr>
-                                        <th>No User Data Available.</th>
-                                    </tr> ';
+                                    <th>No User Data Available.</th>
+                                </tr> ';
             ?>
 
             <?php endif; ?>
