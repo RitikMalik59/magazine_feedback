@@ -1,6 +1,7 @@
 <?php
 // session start
-// session_start();
+session_start();
+
 // DB Params
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'root');

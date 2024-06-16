@@ -1,3 +1,7 @@
+<?php
+is_loggedIn();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,44 +18,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- bootstrap icon  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        .error {
-            color: red;
-        }
 
-        .form-signin {
-            max-width: 330px;
-            padding: 1rem;
-        }
-
-        .ellipsis {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            width: 100px;
-        }
-
-        .app {
-            /* height: 18px; */
-            width: 140px;
-            padding: 0;
-            overflow: hidden;
-            position: relative;
-            display: inline-block;
-            /* margin: 0 5px 0 5px; */
-            text-align: center;
-            text-decoration: none;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #000;
-        }
-    </style>
 </head>
 
-<body class="bg-light">
-    <header>
+<body>
+    <!-- <header>
         <img class="img-fluid" src="https://picsum.photos/1500/300" alt="">
-    </header>
-
-
+    </header> -->
+    <?php include "admin_navbar.php"; ?>
     <div class="container-fluid">
