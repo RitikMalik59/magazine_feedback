@@ -22,10 +22,10 @@
 </div>
 
 <?php
-// if (isset($_GET['id'])) {
-//     $id = $_GET['id'];
-//     echo $id;
-// }
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    // echo $id;
+}
 
 ?>
 

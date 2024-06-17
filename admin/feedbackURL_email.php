@@ -23,7 +23,7 @@ $mail = new PHPMailer(true);
 // $body = file_get_contents('contents.html');
 
 //Server settings
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+// $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
 
 $mail->isSMTP();
 $mail->Host = SMTP_HOST;
@@ -50,27 +50,15 @@ $mail->Subject = 'PHPMailer Simple database mailing list test';
 
 //Connect to the database and select the recipients from your mailing list that have not yet been sent to
 //You'll need to alter this to match your database
-// $mysql = mysqli_connect('localhost', 'username', 'password');
-// mysqli_select_db($mysql, 'mydb');
-// $result = mysqli_query($mysql, 'SELECT full_name, email, photo FROM mailinglist WHERE sent = FALSE');
 $set_limit = 3;
 $query = "SELECT * FROM old_records WHERE is_email_sent = ? LIMIT $set_limit";
 $stmt = $connection->prepare($query);
 $stmt->execute([0]);
 $row_count = $stmt->rowCount();
 
-// echo '<br>' . $id . '<br>';
-// echo '<br>' . var_dump($numbers) . '<br>';
-// echo '<br>' .  $feedback_url . '<br>';
-// die();
-
-
 if ($row_count > 0) {
     $result = $stmt->fetchAll();
 
-    // var_dump($result);
-    // echo '<br>' . $row_count . '<br>';
-    // die();
     foreach ($result as $row) {
         $id = $row['id'] ?? '';
         $name = $row['name'] ?? '';
@@ -83,9 +71,7 @@ if ($row_count > 0) {
         $hashids = new Hashids('', 15);
         $id = $hashids->encode($id); // o2fXhV
         $feedback_url = 'http://localhost/magazine_feedback/index.php?_id=' . $id;
-
         // $numbers = $hashids->decode($id); // [1, 2, 3]
-
 
         $body = '<!DOCTYPE html>
         <html>
@@ -193,11 +179,10 @@ if ($row_count > 0) {
         
         </html>';
 
-
         try {
+
             $mail->addAddress($email, $name);
 
-            //Same body for all messages, so set this before the sending loop
             //If you generate a different body for each recipient (e.g. you're using a templating system),
             //set it inside the loop
             // $body = "Hello, $name your email is $email and is id : $id";
@@ -222,13 +207,8 @@ if ($row_count > 0) {
             $mail->send();
             echo 'Message sent to :' . htmlspecialchars($row['name']) . ' (' .
             htmlspecialchars($email) . ')<br>';
-            //Mark it as sent in the DB
-            // mysqli_query(
-            //     $mysql,
-            //     "UPDATE mailinglist SET sent = TRUE WHERE email = '" .
-            //         mysqli_real_escape_string($mysql, $email) . "'"
-            // );
 
+            //Mark it as sent in the DB
             $is_email_sent = 1;
 
             // set is_email_sent in database to 1 when email sent successfully

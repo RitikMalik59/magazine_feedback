@@ -478,11 +478,6 @@ if (isset($_REQUEST['id'])) {
         
         </html>';
 
-        // var_dump($data);
-        // echo '<br>';
-
-
-
         if ($is_email_sent === 0) {
 
             //Create an instance; passing `true` enables exceptions

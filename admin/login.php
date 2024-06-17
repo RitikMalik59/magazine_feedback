@@ -4,7 +4,6 @@
 <?php
 
 $stored_username = 'admin';
-// $stored_password = 'password123'; // In a real-world scenario, this should be hashed
 $stored_password = password_hash('1234', PASSWORD_DEFAULT);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

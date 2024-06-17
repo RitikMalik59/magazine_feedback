@@ -39,10 +39,6 @@ if (!empty($_SESSION['response'])) {
     </div>
 
     <!-- <div class="col-md-12 mb-3 head">
-
-        <div class="float-start">
-            <a href="javascript:void(0);" class="btn btn-primary" onclick="formToggle('importFrm');"><i class="bi bi-plus-square-dotted"></i> Import</a>
-        </div>
         <div class="float-end">
             <h5>CSV format only</h5>
             <a href="javascript:void(0);" class="btn btn-primary" onclick="formToggle('importFrm');"><i class="bi bi-plus-square-dotted"></i> Import</a>
@@ -53,7 +49,6 @@ if (!empty($_SESSION['response'])) {
         <form action="./includes/import_data.php" method="post" class="row g-2 float-end border border-primary mb-3" enctype="multipart/form-data">
             <div class="col-auto">
                 <input type="file" name="file" class="form-control" required />
-
                 <!-- Link to download sample format -->
                 <!-- <p class="text-start mb-0 mt-2">
                     <a href="sample-csv-members.csv" class="link-primary" download>Download Sample Format</a>
@@ -81,7 +76,6 @@ if (!empty($_SESSION['response'])) {
         <tbody>
             <?php
             // Fetch member records from database 
-            // $result = $db->query("SELECT * FROM old_records ORDER BY id DESC");
             $query = "SELECT * FROM old_records ORDER BY id DESC";
             $stmt = $connection->prepare($query);
             $stmt->execute();

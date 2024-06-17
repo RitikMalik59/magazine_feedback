@@ -1,7 +1,5 @@
 $( document ).ready(function() {
     // console.log( "ready!" );
-
-    
       $('input[type=radio][name=answer_3]').change(function() {
         // console.log(this.value);
         if (this.value == 'yes') {

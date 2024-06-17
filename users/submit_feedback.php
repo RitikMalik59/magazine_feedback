@@ -15,13 +15,6 @@ if (isset($_POST['feedback_submit'])) {
     $answer_5 = $_POST['answer_5'];
     $answer_6 = $_POST['answer_6'];
 
-    // echo $answer_1 . '<br>';
-    // echo $answer_2 . '<br>';
-    echo $answer_3 . '<br>';
-    echo $answer_6 . '<br>';
-
-    var_dump($_POST);
-
     // prepare sql and bind parameters
     try {
         $query = "INSERT INTO feedback (name, designation, company, phone, email, answer_1, answer_2, answer_3, answer_4, answer_5, answer_6)
@@ -30,7 +23,7 @@ if (isset($_POST['feedback_submit'])) {
         // var_dump($stmt);
         $stmt->execute([$name, $designation, $company, $phone, $email, $answer_1, $answer_2, $answer_3, $answer_4, $answer_5, $answer_6]);
         $last_inserted_id = $connection->lastInsertId();
-        echo $last_inserted_id;
+        // echo $last_inserted_id;
         // echo "<br> Inserted successfully .";
         redirect('../thank_you.php?id=' . $last_inserted_id);
     } catch (\PDOException $e) {

@@ -49,9 +49,9 @@
 </head>
 
 <body class="bg-light">
-    <header>
+    <!-- <header>
         <img class="img-fluid" src="https://picsum.photos/1500/150" alt="">
-    </header>
+    </header> -->
 
 
     <div class="container-fluid">
