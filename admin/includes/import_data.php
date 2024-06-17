@@ -25,15 +25,20 @@ if (isset($_POST['importSubmit'])) {
             $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
 
             // Skip the first line 
-            fgetcsv($csvFile);
+            // fgetcsv($csvFile);
+            echo '<br>';
+            // echo count(fgetcsv($csvFile));
 
+            if (count(fgetcsv($csvFile)) > 1) {
 
-            // Parse data from CSV file line by line 
+                echo 'csv file separated by comma';
+
+                // Parse data from CSV file line by line 
             while (($line = fgetcsv($csvFile)) !== FALSE) {
-                if (count($line) == 1) {
-                    $line = fgetcsv($csvFile, null, ';');
-                    // var_dump($line);
-                }
+                // if (count($line) == 1) {
+                //     $line = fgetcsv($csvFile, null, ';');
+                //     // var_dump($line);
+                // }
                 $line_arr = !empty($line) ? array_filter($line) : '';
 
                 if (!empty($line_arr)) {
@@ -77,6 +82,26 @@ if (isset($_POST['importSubmit'])) {
 
             $res_status = 'success';
             $res_msg = 'Members data has been imported successfully.';
+            } else {
+
+                echo 'csv format not separated by comma';
+                $res_status = 'danger';
+                $res_msg = 'Please select a valid CSV file, which is separated by comma only';
+                echo '<br> not correct type csv <br>';
+            }
+
+
+            // echo '<br>';
+            // var_dump(fgetcsv($csvFile));
+            // var_dump(fgetcsv($csvFile));
+            // echo '<br>';
+            // var_dump(fgetcsv($csvFile));
+            // echo '<br>';
+            // var_dump(fgetcsv($csvFile));
+            // var_dump(fgetcsv($csvFile));
+            // die();
+
+            
         } else {
             $res_status = 'danger';
             $res_msg = 'Something went wrong, please try again.';

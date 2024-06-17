@@ -20,28 +20,34 @@ if (!empty($_SESSION['response'])) {
     </div>
 <?php } ?>
 
-<div class="row d-flex justify-content-between">
-    <!-- Import link -->
+<div class="row ">
+    <div class="row d-flex justify-content-between mb-3">
 
-    <div class="col">
-        <p><b>CSV format only Eg :</b> "Ritik Malik","Web Developer","Vis Group","1234567890","example@gmail.com"</p>
-    </div>
-    <div class="col-md-3">
-        <div class="float-end">
-            <a href="javascript:void(0);" class="btn btn-primary" onclick="formToggle('importFrm');"><i class="bi bi-plus-square-dotted"></i> Import</a>
+        <!-- Import link -->
+
+        <div class="col">
+            <p>
+                <b>NOTE: CSV format separated by comma (,) only are accepted ! </b><br>
+                <b> Eg :</b>"Ritik Malik","Web Developer","Vis Group","1234567890","example@gmail.com"
+            </p>
+        </div>
+        <div class="col-md-3">
+            <div class="float-end">
+                <a href="javascript:void(0);" class="btn btn-primary" onclick="formToggle('importFrm');"><i class="bi bi-plus-square-dotted"></i> Import</a>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-12 mb-3 head">
+    <!-- <div class="col-md-12 mb-3 head">
 
         <div class="float-start">
             <a href="javascript:void(0);" class="btn btn-primary" onclick="formToggle('importFrm');"><i class="bi bi-plus-square-dotted"></i> Import</a>
         </div>
         <div class="float-end">
-            <!-- <h5>CSV format only</h5> -->
+            <h5>CSV format only</h5>
             <a href="javascript:void(0);" class="btn btn-primary" onclick="formToggle('importFrm');"><i class="bi bi-plus-square-dotted"></i> Import</a>
         </div>
-    </div>
+    </div> -->
     <!-- CSV file upload form -->
     <div class="col-md-12" id="importFrm" style="display: none;">
         <form action="./includes/import_data.php" method="post" class="row g-2 float-end border border-primary mb-3" enctype="multipart/form-data">
