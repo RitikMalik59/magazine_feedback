@@ -1,5 +1,11 @@
 <?php include "./config/db_connect.php"; ?>
 <?php include "includes/header.php"; ?>
+<?php require './vendor/autoload.php'; ?>
+<?php
+
+use Hashids\Hashids;
+
+?>
 
 <h2 class="display-6 text-center mt-5">Magazine Feedback Form</h2>
 
@@ -7,8 +13,6 @@
     <div class="row ">
         <div class="col-md-9 mx-auto">
             <div class="card card-body shadow  mt-3">
-                <!-- <h5>Feedback</h5> -->
-                <!-- <p>Please fill this form to register with us</p> -->
                 <p class="fs-6 fw-medium">Thanks for being a part of Clean India Journal - The Voice of the Indian Cleaning Industry. Being a responsible magazine, we are on the journey of constant improvement. Kindly share your valuable feedback to help us serve the cleaning & hygiene professionals better and A Clean India at large.</p>
                 <form class="row g-3" id="feedback_form" action="./users/submit_feedback.php" method="post">
                     <div class=" bg-secondary-subtle mt-5">
@@ -17,30 +21,16 @@
                     <?php
                     if (isset($_GET['_id'])) {
 
-                        $id = $_GET['_id'];
-                        // $name = $_POST['name'];
-                        // $designation = $_POST['designation'];
-                        // $company = $_POST['company'];
-                        // $phone = $_POST['phone'];
-                        // $email = $_POST['email'];
-                        // echo $id;
-
-                        // You can try below steps to hide id in your urls.
-
-                        // $id = 123;
-
-                        // $encode = base64_encode($id, '10');
-
-                        // $decode = base64_decode($encode);
-                        // echo $encode . '<BR>';
-                        // echo $decode . '<BR>';
-
+                        // hashing URL ID for security
+                        $hashids = new Hashids('', 15);
+                        $hash_id = $_GET['_id'];
+                        $decoded_id = $hashids->decode($hash_id); // [1, 2, 3]
+                        $id = $decoded_id[0];
 
                         $query = "SELECT name, designation, company, phone, email FROM old_records WHERE id = ?";
                         $stmt = $connection->prepare($query);
                         $stmt->execute([$id]);
                         $row_count = $stmt->rowCount();
-
 
                         if ($row_count > 0) {
 
@@ -55,16 +45,11 @@
 
                             // var_dump($data);
                         }
-                        // echo $data[0]['name'] . '<br>';
-                        // echo $name . '<br>';
-                        // echo $row_count . '<br>';
                     }
-
 
                     ?>
 
                     <input type="hidden" name="id" value="<?= $id; ?>">
-
 
                     <div class="col-md-12">
                         <label class="form-label">Name:<sup class="text-danger">*</sup></label>
@@ -206,39 +191,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="table">
-            <table class="table table-hover table-striped caption-top mt-5">
-                <caption class="text-center fw-bold">List of Users</caption>
-                <thead>
-                    <tr>
-                        <th class="text-center" scope="col">User ID</th>
-                        <th class="text-center" scope="col">Name</th>
-                        <th class="text-center" scope="col">Refer ID</th>
-                        <th class="text-center" scope="col">Amount</th>
-                        <th class="text-center" scope="col">Wallet</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @if (count($users_data) > 0)
-
-                    @foreach ($users_data as $user)
-                    <tr>
-                        <th class="text-center" scope="row">{{ $user->user_id }}</th>
-                        <th class="text-center" scope="row">{{ $user->name }}</th>
-                        <th class="text-center" scope="row">{{ $user->refer_id ?? '-' }}</th>
-                        <th class="text-center" scope="row">{{ $user->amount }}</th>
-                        <th class="text-center" scope="row">{{ $user->wallet }}</th>
-                    </tr>
-                    @endforeach
-                    @else
-                    <tr>
-                        <th>No User Data Available.</th>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
-        </div> -->
 </div>
 
 <script>

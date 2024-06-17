@@ -50,7 +50,7 @@
 
 <body class="bg-light">
     <header>
-        <img class="img-fluid" src="https://picsum.photos/1500/300" alt="">
+        <img class="img-fluid" src="https://picsum.photos/1500/150" alt="">
     </header>
 
 

@@ -15,7 +15,7 @@
                 <h2>Feedback Submitted Successfully !</h2>
                 <p class="fs-5">Thank you for sharing your insights. Your inputs will help us make the magazine better. </p>
                 <!-- <button class="btn btn-outline-success"><a href="./index.php" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none">Back Home</a></button> -->
-                <button class="btn btn-success"><a href="./index.php" class="link-light  text-decoration-none">Go Back </a></button>
+                <button class="btn btn-success"><a href="./index.php" class="link-light text-decoration-none">Go Back </a></button>
             </div>
         </div>
     </div>
