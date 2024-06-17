@@ -1,5 +1,5 @@
 <?php include "../config/db_connect.php"; ?>
-<?php include "./includes/admin_header.php"; ?>
+<?php include "./layouts/admin_header.php"; ?>
 
 <?php
 
@@ -56,4 +56,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
 
-        <?php include APPROOT . "/admin/includes/admin_footer.php"; ?>
+        <?php include APPROOT . "/admin/layouts/admin_footer.php"; ?>

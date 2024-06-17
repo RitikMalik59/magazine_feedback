@@ -1,5 +1,5 @@
 <?php include "../config/db_connect.php"; ?>
-<?php include APPROOT . "/admin/includes/admin_header.php"; ?>
+<?php include APPROOT . "/admin/layouts/admin_header.php"; ?>
 <?php
 is_loggedIn();
 ?>
@@ -80,4 +80,4 @@ is_loggedIn();
     });
 </script>
 
-<?php include APPROOT . "/admin/includes/admin_footer.php"; ?>
+<?php include APPROOT . "/admin/layouts/admin_footer.php"; ?>
