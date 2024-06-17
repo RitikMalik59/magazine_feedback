@@ -70,7 +70,7 @@ is_loggedIn();
 
 <script>
     $(document).ready(function() {
-        console.log('ready document');
+        // console.log('ready document index page');
         $('#feedbackTable td').on("dblclick", function() {
 
             $(this).toggleClass("text-truncate");

@@ -52,26 +52,17 @@ if (!empty($_SESSION['response'])) {
     <div class="col-md-12" id="importFrm" style="display: none;">
         <form action="./includes/import_data.php" method="post" class="row g-2 float-end border border-primary mb-3" enctype="multipart/form-data">
             <div class="col-auto">
-                <!-- <input type="file" name="file" class="form-control" /> -->
                 <input type="file" name="file" class="form-control" required />
-                <!-- <label for="formFile" class="form-label">Default file input example</label> -->
-                <!-- <input class="form-control" type="file" name="file" id="formFile"> -->
 
                 <!-- Link to download sample format -->
-                <p class="text-start mb-0 mt-2">
+                <!-- <p class="text-start mb-0 mt-2">
                     <a href="sample-csv-members.csv" class="link-primary" download>Download Sample Format</a>
-                </p>
+                </p> -->
             </div>
             <div class="col-auto">
-                <!-- <div class="mb-3">
-                    <label for="formFile" class="form-label">Default file input example</label>
-                    <input class="form-control" type="file" name="csv" id="formFile">
-                </div> -->
-
                 <input type="submit" class="btn btn-success mb-3" name="importSubmit" value=" Import CSV">
             </div>
-            <!-- <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload Image" name="submit"> -->
+
         </form>
     </div>
 
@@ -120,23 +111,18 @@ if (!empty($_SESSION['response'])) {
 <!-- Show/hide CSV upload form -->
 <script>
     $(document).ready(function() {
+        console.log('document ready upload data page');
 
-    });
-
-    function formToggle(ID) {
-        var element = document.getElementById(ID);
-        if (element.style.display === "none") {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
+        function formToggle(ID) {
+            var element = document.getElementById(ID);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
         }
-    }
-</script>
-
-<script>
-    $(document).ready(function() {
-        console.log('document ready');
     });
 </script>
+
 
 <?php include APPROOT . "/admin/includes/admin_footer.php"; ?>
