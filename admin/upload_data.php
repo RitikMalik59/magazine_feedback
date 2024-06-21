@@ -62,60 +62,124 @@ if (!empty($_SESSION['response'])) {
     </div>
 
     <!-- Data list table -->
-    <table class="table table-striped table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Designation</th>
-                <th>Company</th>
-                <th>Phone</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Fetch member records from database 
-            $query = "SELECT * FROM old_records ORDER BY id DESC";
-            $stmt = $connection->prepare($query);
-            $stmt->execute();
-            $row_count = $stmt->rowCount();
-            if ($row_count > 0) {
-                $data = $stmt->fetchAll();
-                foreach ($data as $key => $user) {
-            ?>
-                    <tr>
-                        <td><?php echo '#' . $user['id']; ?></td>
-                        <td><?php echo $user['name']; ?></td>
-                        <td><?php echo $user['designation']; ?></td>
-                        <td><?php echo $user['company']; ?></td>
-                        <td><?php echo $user['phone']; ?></td>
-                        <td><?php echo $user['email']; ?></td>
-                    </tr>
-                <?php }
-            } else { ?>
+    <div class="table-responsive px-4">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td colspan="5">No User(s) found...</td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Email Progress</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php
+                // Determine the total number of records
+                $sql = "SELECT COUNT(id) as count FROM old_records";
+                $result = $connection->prepare($sql);
+                $result->execute();
+                $row = $result->fetchAll()[0];
+                $total_records =  $row['count'];
+
+                // Define how many results you want per page
+                $results_per_page = 50;
+
+                // Determine the total number of pages available
+                $total_pages = ceil($total_records / $results_per_page);
+
+                // Determine which page number visitor is currently on
+                if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                    $page = (int)$_GET['page'];
+                } else {
+                    $page = 1;
+                }
+                // Determine the SQL LIMIT starting number for the results on the displaying page
+                $start_from = ($page - 1) * $results_per_page;
+
+                // Retrieve the data
+                // $sql = "SELECT id, name, email FROM users LIMIT $start_from, $results_per_page";
+                // $result = $conn->query($sql);
+                // Fetch member records from database 
+                $query = "SELECT * FROM old_records ORDER BY id DESC LIMIT $start_from, $results_per_page";
+                $stmt = $connection->prepare($query);
+                $stmt->execute();
+                $row_count = $stmt->rowCount();
+                if ($row_count > 0) {
+                    $data = $stmt->fetchAll();
+                    foreach ($data as $key => $user) {
+                ?>
+                        <tr>
+                            <td><?php echo '#' . $user['id']; ?></td>
+                            <td><?php echo $user['name']; ?></td>
+                            <td><?php echo $user['designation']; ?></td>
+                            <td><?php echo $user['company']; ?></td>
+                            <td><?php echo $user['phone']; ?></td>
+                            <td><?php echo $user['email']; ?></td>
+                            <td><?php echo ($user['is_email_sent'] == 0) ? 'Waiting' : 'Sent'; ?></td>
+                        </tr>
+                    <?php }
+                } else { ?>
+                    <tr>
+                        <td colspan="5">No User(s) found...</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center mt-5">
+                <!-- Previous button -->
+                <li class="page-item <?php if ($page <= 1) {
+                                            echo 'disabled';
+                                        } ?>">
+                    <a class="page-link" href="<?php if ($page <= 1) {
+                                                    echo '#';
+                                                } else {
+                                                    echo "upload_data.php?page=" . ($page - 1);
+                                                } ?>">Previous</a>
+                </li>
+
+                <!-- Page number links -->
+                <?php
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo "<li class='page-item";
+                    if ($i == $page) echo " active";
+                    echo "'><a class='page-link' href='upload_data.php?page=" . $i . "'>" . $i . "</a></li>";
+                }
+                ?>
+
+                <!-- Next button -->
+                <li class="page-item <?php if ($page >= $total_pages) {
+                                            echo 'disabled';
+                                        } ?>">
+                    <a class="page-link" href="<?php if ($page >= $total_pages) {
+                                                    echo '#';
+                                                } else {
+                                                    echo "upload_data.php?page=" . ($page + 1);
+                                                } ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
 <!-- Show/hide CSV upload form -->
 <script>
     $(document).ready(function() {
         console.log('document ready upload data page');
-
-        function formToggle(ID) {
-            var element = document.getElementById(ID);
-            if (element.style.display === "none") {
-                element.style.display = "block";
-            } else {
-                element.style.display = "none";
-            }
-        }
     });
+
+    function formToggle(ID) {
+        var element = document.getElementById(ID);
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
 </script>
 
 

@@ -1,6 +1,6 @@
 <?php
 
-include "../config/db_connect.php";
+include __DIR__ . "/../config/db_connect.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\Exception;
 // require 'path/to/PHPMailer/src/SMTP.php';
 
 //Load Composer's autoloader
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $adminEmail = 'admin@test.com';
 
@@ -491,13 +491,18 @@ if (isset($_REQUEST['id'])) {
                 $mail->SMTPAuth   = SMTP_AUTH;                                   //Enable SMTP authentication
                 $mail->Username   = SMTP_USERNAME;                     //SMTP username
                 $mail->Password   = SMTP_PASSWORD;                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
                 $mail->Port       = SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
                 // clear addresses
                 $mail->clearAddresses();
-                $mail->setFrom($admin_email, $admin_name);         // Set sender of the mail
+                $mail->setFrom(SMTP_SETFROM_MAIL, SMTP_SETFROM_NAME);         // Set sender of the mail
+                if (is_array(SMTP_CC_MAIL)) {
+                    foreach (SMTP_CC_MAIL as $key => $email) {
+                        $mail->addCC($email);
+                    }
+                }
                 $mail->addAddress($user_email, $name);     //Add a recipient
                 // $mail->addAddress('ellen@example.com');               //Name is optional
                 // $mail->addReplyTo('info@example.com', 'Information');
@@ -526,8 +531,13 @@ if (isset($_REQUEST['id'])) {
                 //Recipients
                 // clear addresses
                 $mail->clearAddresses();
-                $mail->setFrom($admin_email, $admin_name);         // Set sender of the mail
-                $mail->addAddress($admin_email, $admin_name);     //Add a recipient
+                $mail->setFrom(SMTP_SETFROM_MAIL, SMTP_SETFROM_NAME);         // Set sender of the mail
+                if (is_array(SMTP_CC_MAIL)) {
+                    foreach (SMTP_CC_MAIL as $key => $email) {
+                        $mail->addCC($email);
+                    }
+                }
+                $mail->addAddress(SMTP_SETFROM_MAIL, SMTP_SETFROM_NAME);     //Add a recipient
                 // $mail->addAddress('ellen@example.com');               //Name is optional
                 // $mail->addReplyTo('info@example.com', 'Information');
                 // $mail->addCC('cc2@example.com');
